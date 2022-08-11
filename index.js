@@ -1,10 +1,12 @@
 'use strict';
 
+const DEFAULT_ASYNC_TIMEOUT_MS = 10000;
+
 const hooks = [];
 const errHooks = [];
 let called = false;
 let waitingFor = 0;
-let asyncTimeoutMs = 10000;
+let asyncTimeoutMs = DEFAULT_ASYNC_TIMEOUT_MS;
 
 const events = {};
 const filters = {};
@@ -181,6 +183,11 @@ add.unhandledRejectionHandler = function (hook) {
 // Configure async force exit timeout
 add.forceExitTimeout = function (ms) {
 	asyncTimeoutMs = ms;
+};
+
+// Reset async force exit timeout to default value
+add.resetExitTimeout = function () {
+	asyncTimeoutMs = DEFAULT_ASYNC_TIMEOUT_MS;
 };
 
 // Export
