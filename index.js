@@ -104,6 +104,22 @@ function add(hook) {
 	}
 }
 
+add.remove = function (hook) {
+  const index = hooks.indexOf(hook);
+  if (index !== -1) {
+    hooks.splice(index, 1);
+  }
+  if (hooks.length === 0) {
+    add.unhookEvent('exit');
+    add.unhookEvent('beforeExit');
+    add.unhookEvent('SIGHUP');
+    add.unhookEvent('SIGINT');
+    add.unhookEvent('SIGTERM');
+    add.unhookEvent('SIGBREAK');
+    add.unhookEvent('message');
+  }
+}
+
 // New signal / event to hook
 add.hookEvent = function (event, code, filter) {
 	events[event] = function () {

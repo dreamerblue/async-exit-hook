@@ -1,6 +1,4 @@
-# async-exit-hook
-[![Build Status](https://api.travis-ci.org/Tapppi/async-exit-hook.svg)](https://travis-ci.org/Tapppi/async-exit-hook)
-[![Coverage Status](https://coveralls.io/repos/github/Tapppi/async-exit-hook/badge.svg?branch=master)](https://coveralls.io/github/Tapppi/async-exit-hook?branch=master)
+# async-exit-hook-improved
 
 > Run some code when the process exits
 
@@ -18,7 +16,7 @@ Forked and pretty much rewritten from [exit-hook](https://npmjs.com/package/exit
 ## Install
 
 ```
-$ npm install --save async-exit-hook
+$ npm install --save async-exit-hook-improved
 ```
 
 ## Usage
@@ -42,7 +40,7 @@ by sending a shutdown message (`childProc.send('shutdown')`).
 
 ### Example
 ```js
-const exitHook = require('async-exit-hook');
+const exitHook = require('async-exit-hook-improved');
 
 exitHook(() => {
     console.log('exiting');
@@ -60,6 +58,13 @@ exitHook(callback => {
         callback();
     }, 1000);
 });
+
+// you can remove a hook
+const hook = () => {
+    console.log('exiting 4');
+};
+exitHook(hook);
+exitHook.remove(hook);
 
 // You can hook uncaught errors with uncaughtExceptionHandler(), consequently adding 
 // async support to uncaught errors (normally uncaught errors result in a synchronous exit).
